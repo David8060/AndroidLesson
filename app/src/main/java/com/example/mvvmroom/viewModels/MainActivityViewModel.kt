@@ -15,7 +15,7 @@ class MainActivityViewModel(private val catRepository: CatRepository) : ViewMode
 
     private val _stateFlow = MutableStateFlow(emptyList<Cat>())
     val stateFlow = _stateFlow.asStateFlow()
-    fun initViewModel() {
+    init {
         viewModelScope.launch(Dispatchers.IO) {
             val result = catRepository.doNetworkCall()
             if (result != null) {
@@ -23,6 +23,8 @@ class MainActivityViewModel(private val catRepository: CatRepository) : ViewMode
             }
         }
     }
+
+
 }
 
 

@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 2)
         binding.resView.layoutManager = layoutManager
 
-        viewModel.initViewModel()
-
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collect { cats ->
