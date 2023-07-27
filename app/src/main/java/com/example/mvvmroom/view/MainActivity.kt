@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvmroom.view.recyclerView.CatAdapter
 import com.example.mvvmroom.viewModels.MainActivityViewModel
 import com.example.mvvmroom.databinding.ActivityMainBinding
+import com.example.mvvmroom.view.recyclerView.CatData
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,7 +36,14 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collect { cats ->
-                    rvAdapter.updateData(cats)
+                    val catDataList = cats.map { cat ->
+                        CatData(
+                            breed = cat.breed,
+                            origin = cat.origin,
+                            pattern = cat.pattern
+                        )
+                    }
+                    rvAdapter.updateData(catDataList)
                     rvAdapter.notifyDataSetChanged()
                 }
             }

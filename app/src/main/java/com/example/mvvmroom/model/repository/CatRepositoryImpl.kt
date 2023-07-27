@@ -1,5 +1,6 @@
 package com.example.mvvmroom.model.repository
 
+import android.util.Log
 import com.example.mvvmroom.model.retrofit.MyApi
 import com.example.mvvmroom.model.room.Cat
 import com.example.mvvmroom.model.room.DAO
@@ -28,6 +29,9 @@ class CatRepositoryImpl(private val dao: DAO, private val api: MyApi) : CatRepos
             if (response.isSuccessful) {
                 val data = response.body()
                 if (data != null) {
+                    dao.insertAll(data.data)
+                    Log.d("YourViewModel", "Cats are ${dao.getAllDatas()[0]}")
+                    Log.d("YourViewModel", "Cats inserted and fetched successfully")
                     return data.data
                 }
                 return null
@@ -37,4 +41,5 @@ class CatRepositoryImpl(private val dao: DAO, private val api: MyApi) : CatRepos
             throw Exception("Network call failed: ${e.message}")
         }
     }
+
 }

@@ -5,16 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "cat_table")
 data class Cat(
-
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     val breed: String,
     val origin: String,
     val pattern: String,
-    val coat: String,
-    val country: String,
 
-    ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null
-
-
-}
+    )

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvmroom.databinding.CatBinding
 import com.example.mvvmroom.model.room.Cat
 
-class CatAdapter(var cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.CatViewHolder>() {
+class CatAdapter(var cats: List<CatData>) : RecyclerView.Adapter<CatAdapter.CatViewHolder>() {
 
     class CatViewHolder(val binding: CatBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -22,14 +22,12 @@ class CatAdapter(var cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.CatViewH
             with(cats[position]) {
                 binding.tvBreed.text = breed
                 binding.tvOrigin.text = origin
-                binding.tvCountry.text = country
                 binding.tvPattern.text = pattern
-                binding.tvCoat.text = coat
             }
         }
     }
 
-    fun updateData(newCatList: List<Cat>) {
+    fun updateData(newCatList: List<CatData>) {
         cats = newCatList
     }
 }
